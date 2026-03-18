@@ -1,0 +1,49 @@
+# Example: Ollama + ComfyUI + OneGPU4All in Docker
+# Adjust GPU runtime and ports to match your setup.
+
+services:
+  ollama:
+    image: ollama/ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama-data:/root/.ollama
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+  comfyui:
+    image: comfyanonymous/comfyui
+    ports:
+      - "8188:8188"
+    volumes:
+      - comfyui-models:/app/models
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+  onegpu4all:
+    image: node:22-slim
+    working_dir: /app
+    volumes:
+      - ./:/app
+    ports:
+      - "5001:5001"     # Ollama proxy
+      - "5101:5101"     # ComfyUI proxy
+      - "5102:5102"     # Status API
+    command: node bin/onegpu4all.mjs --config /app/config.yaml
+    depends_on:
+      - ollama
+      - comfyui
+
+volumes:
+  ollama-data:
+  comfyui-models:

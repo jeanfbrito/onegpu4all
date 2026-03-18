@@ -1,0 +1,14 @@
+[Unit]
+Description=OneGPU4All — VRAM broker for single-GPU machines
+After=network.target
+
+[Service]
+Type=simple
+User=YOUR_USER
+WorkingDirectory=/opt/onegpu4all
+ExecStart=/usr/bin/node bin/onegpu4all.mjs --config /opt/onegpu4all/config.yaml
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

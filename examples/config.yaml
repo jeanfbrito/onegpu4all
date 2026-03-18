@@ -1,0 +1,15 @@
+# OneGPU4All — Example configuration
+# Two backends sharing a single GPU: Ollama (LLMs) and ComfyUI (image generation)
+
+statusPort: 5102
+
+backends:
+  - name: ollama
+    proxyPort: 5001
+    upstream: http://localhost:11434
+    unloadStrategy: ollama
+
+  - name: comfyui
+    proxyPort: 5101
+    upstream: http://localhost:8188
+    unloadStrategy: comfyui

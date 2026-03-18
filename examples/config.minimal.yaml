@@ -1,0 +1,9 @@
+# OneGPU4All — Minimal config (single backend, no VRAM swapping needed)
+
+statusPort: 5102
+
+backends:
+  - name: ollama
+    proxyPort: 5001
+    upstream: http://localhost:11434
+    unloadStrategy: ollama

@@ -1,0 +1,39 @@
+{
+  "name": "onegpu4all",
+  "version": "1.0.0",
+  "description": "One GPU, many services. Zero conflicts. VRAM broker that queues and swaps GPU memory between backends like Ollama and ComfyUI.",
+  "type": "module",
+  "bin": {
+    "onegpu4all": "bin/onegpu4all.mjs",
+    "onegpu4all-status": "bin/onegpu4all-status.mjs"
+  },
+  "main": "src/broker.mjs",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "start": "node bin/onegpu4all.mjs",
+    "status": "node bin/onegpu4all-status.mjs",
+    "test": "node --test tests/*.test.mjs"
+  },
+  "keywords": [
+    "gpu",
+    "vram",
+    "broker",
+    "ollama",
+    "comfyui",
+    "stable-diffusion",
+    "llm",
+    "proxy",
+    "queue",
+    "single-gpu"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/onegpu4all/onegpu4all"
+  },
+  "dependencies": {
+    "http-proxy": "^1.18.1"
+  }
+}
